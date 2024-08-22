@@ -13,7 +13,7 @@ const fontSans = Plus_Jakarta_Sans({
 
 
 export const metadata: Metadata = {
-  title: "Careplus",
+  title: "MediPulse",
   description: "A Health Care Management System",
 };
 

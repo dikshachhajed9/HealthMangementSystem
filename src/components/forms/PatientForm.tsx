@@ -10,6 +10,7 @@ import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import  {Button} from "@/components/ui/button"
+import { createUser } from "@/lib/actions/patient.action"
 
 
 export enum FormFieldType{
@@ -40,17 +41,17 @@ const PatientForm = () => {
       phone:"",
     },
   })
-  async function onSubmit ({ name,email,phone}:z.infer<typeof UserFormValidation>){
-    setIsLoading(true);
-     try{
-      //const userData ={ name, email, phone}
+  // async function onSubmit ({ name,email,phone}:z.infer<typeof UserFormValidation>){
+  //   setIsLoading(true);
+  //    try{
+  //     const userData ={ name, email, phone}
 
-      //const user =await createUser(userData);
-      //if(user) router.push('/patient/${user.$id}/register')
-     } catch (error) {
-      console.log(error);
-     }
-  }
+  //     const user = await createUser(userData);
+  //     if(user) router.push('/register')
+  //    } catch (error) {
+  //     console.log(error);
+  //    }
+  // }
  
  
   

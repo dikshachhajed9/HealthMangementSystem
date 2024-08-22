@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CarePulse Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([19.0760, 72.8777], 14);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Hospital marker
+        var hospitalMarker = L.marker([19.0645, 72.8240]).addTo(map).bindPopup("<b>CarePulse Hospital</b><br>Hospital").openPopup();
+
+        if (!navigator.geolocation) {
+            alert("Geolocation features are not supported on your browser!");
+        } else {s
+            navigator.geolocation.getCurrentPosition(getPosition);
+        }
+
+        var lat, long;
+
+        function getPosition(position) {
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            var accuracy = position.coords.accuracy;
+
+            var geomarker = L.marker([lat, long]).addTo(map).bindPopup("<b>Your Location</b>").openPopup();
+            var accuracyRad = L.circle([lat, long], { radius: accuracy }).addTo(map);
+
+            calculateRoute(L.latLng(19.0645, 72.8240)); // Call routing to hospital after getting user's location
+        }
+
+        var routingControl;
+
+        function calculateRoute(destination) {
+            if (lat !== undefined && long !== undefined) {
+                if (routingControl) {
+                    routingControl.remove();
+                }
+                routingControl = L.Routing.control({
+                    waypoints: [
+                        L.latLng(lat, long),
+                        destination
+                    ]
+                }).addTo(map);
+            } else {
+                console.error("GPS location not available.");
+            }
+        }
+    </script>
+</body>
+
+</html>
+

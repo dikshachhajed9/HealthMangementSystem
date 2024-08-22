@@ -12,12 +12,12 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectItem } from "@/components/ui/select";
 
-  import { registerPatient } from "@/lib/actions/patient.actions";
+
 
   
   import "react-datepicker/dist/react-datepicker.css";
   import "react-phone-number-input/style.css";
-  import CustomFormField, from "../CustomFormField";
+  import CustomFormField from "../CustomFormField";
 
   
 import SubmitButton from "../SubmitButton";
@@ -26,6 +26,7 @@ import { PatientFormValidation } from "@/lib/validation";
 import { FileUploader } from "../ui/FileUploader";
 import { PatientFormDefaultValues, GenderOptions, Doctors, IdentificationTypes } from "../../../constants";
 import { FormFieldType } from "./PatientForm";
+//import { registerPatient } from "@/lib/actions/patient.action";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const RegisterForm = ({ user }: { user: User }) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof sPatientFormValidation>) => {
+ /* const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
 
     // Store file info in form data as
@@ -96,12 +97,12 @@ const RegisterForm = ({ user }: { user: User }) => {
     }
 
     setIsLoading(false);
-  };
+  };*/
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        //onSubmit={form.handleSubmit(onSubmit)}
         className="flex-1 space-y-12"
       >
         <section className="space-y-4">
